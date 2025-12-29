@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartumu Untuk 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .year-2026 {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #FFD700, #FF8C00, #FF1493);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+        
+        .fireworks {
+            font-size: 2rem;
+            letter-spacing: 10px;
+            color: #FFD700;
+            margin: 20px 0;
+            animation: sparkle 1.5s infinite alternate;
+        }
+        
+        .card-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card-content {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #fff;
+            font-weight: 300;
+        }
+        
+        .card-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #FFD700;
+            font-weight: 500;
+        }
+        
+        .btn-pick {
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-pick:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.6);
+        }
+        
+        .btn-pick:active {
+            transform: translateY(-2px);
+        }
+        
+        .card-number {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        .new-year-count {
+            font-size: 1rem;
+            color: #FFD700;
+            margin-top: 10px;
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @media (max-width: 600px) {
+            .year-2026 { font-size: 3.5rem; }
+            .card-content { font-size: 1.2rem; }
+            .card-container { padding: 25px; }
+            .btn-pick { padding: 14px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="fireworks">✨🎆✨</div>
+            <h1 class="year-2026">2026</h1>
+            <div class="title">Kartu Motivasi Tahun Baru untuk Remaja</div>
+            <div class="new-year-count">Selamat Menyambut Tahun Baru Penuh Harapan!</div>
+        </div>
+        
+        <div class="card-container">
+            <div class="card-content fade-in" id="motivation-text">
+                Klik tombol di bawah untuk mendapatkan kartu motivasi khusus untuk tahun 2026
+            </div>
+            <div class="card-category" id="category-text">Tahun Baru, Semangat Baru</div>
+            <div class="card-number" id="card-number">Kartu: -/10</div>
+        </div>
+        
+        <button class="btn-pick" id="pick-card">
+            <i class="fas fa-star"></i> Dapatkan Kartu Motivasi
+        </button>
+        
+        <div class="footer">
+            Setiap kartu berisi pesan motivasi untuk menghadapi dunia dan perkembangan diri di tahun 2026
+            <br>
+            <div style="margin-top: 15px;">
+                <i class="fas fa-heart" style="color: #ff6b6b;"></i> Selamat Tahun Baru 2026!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const motivations = [
+            {
+                text: "Di tahun 2026, jadilah pembelajar yang cepat, bukan yang sempurna. Setiap kesalahan adalah data baru untuk versi terbaik dirimu.",
+                category: "Growth Mindset"
+            },
+            {
+                text: "Koneksi manusia lebih bernilai daripada likes di media sosial. Di 2026, bangun hubungan yang mendalam, bukan hanya followers.",
+                category: "Relasi Sehat"
+            },
+            {
+                text: "Teknologi 2026 adalah alat, bukan penentu jati dirimu. Gunakan untuk berkembang, tapi jangan lupa siapa kamu di dunia nyata.",
+                category: "Keseimbangan Digital"
+            },
+            {
+                text: "Keunikanmu adalah superpower di era AI. Di 2026, apa yang membuatmu berbeda justru akan menjadi kekuatan terbesarmu.",
+                category: "Keunikan Diri"
+            },
+            {
+                text: "Ketika dunia berubah cepat di 2026, yang konstan adalah kemampuanmu beradaptasi. Fleksibilitas adalah skill nomor satu.",
+                category: "Adaptasi"
+            },
+            {
+                text: "Merasa lost is part of the journey. Di 2026, izinkan dirimu bereksplorasi tanpa tekanan harus segera 'tahu semua jawaban'.",
+                category: "Perjalanan Diri"
+            },
+            {
+                text: "Kesehatan mental adalah fondasi, bukan bonus. Di 2026, merawat pikiran sama pentingnya dengan merawat fisik.",
+                category: "Kesehatan Holistik"
+            },
+            {
+                text: "Passion-mu mungkin berevolusi di 2026, dan itu okay. Yang penting tetap punya sesuatu yang membuatmu bangun pagi dengan semangat.",
+                category: "Passion & Tujuan"
+            },
+            {
+                text: "Dunia 2026 butuh problem-solvers, bukan hanya kritikus. Jadilah bagian dari solusi, sekecil apa pun kontribusimu.",
+                category: "Kontribusi Sosial"
+            },
+            {
+                text: "Masa depan bukan tentang prediksi sempurna, tapi tentang berani mengambil langkah pertama, bahkan ketika peta belum jelas.",
+                category: "Keberanian"
+            }
+        ];
+        
+        const motivationText = document.getElementById('motivation-text');
+        const categoryText = document.getElementById('category-text');
+        const cardNumber = document.getElementById('card-number');
+        const pickButton = document.getElementById('pick-card');
+        let usedCards = [];
+        
+        function getRandomCard() {
+            // Jika semua kartu sudah digunakan, reset
+            if (usedCards.length >= motivations.length) {
+                usedCards = [];
+            }
+            
+            // Cari kartu yang belum digunakan
+            let availableCards = [];
+            for (let i = 0; i < motivations.length; i++) {
+                if (!usedCards.includes(i)) {
+                    availableCards.push(i);
+                }
+            }
+            
+            // Pilih secara acak dari kartu yang tersedia
+            const randomIndex = Math.floor(Math.random() * availableCards.length);
+            const cardIndex = availableCards[randomIndex];
+            
+            // Tandai kartu ini sudah digunakan
+            usedCards.push(cardIndex);
+            
+            return {
+                index: cardIndex,
+                motivation: motivations[cardIndex]
+            };
+        }
+        
+        function displayCard(card) {
+            // Reset animasi
+            motivationText.classList.remove('fade-in');
+            void motivationText.offsetWidth; // Trigger reflow
+            motivationText.classList.add('fade-in');
+            
+            // Update konten
+            motivationText.textContent = card.motivation.text;
+            categoryText.textContent = card.motivation.category;
+            cardNumber.textContent = `Kartu: ${card.index + 1}/10`;
+            
+            // Update tombol jika semua kartu sudah dilihat
+            if (usedCards.length >= motivations.length) {
+                pickButton.innerHTML = '<i class="fas fa-redo"></i> Mulai Lagi';
+            } else {
+                pickButton.innerHTML = '<i class="fas fa-star"></i> Kartu Motivasi Berikutnya';
+            }
+        }
+        
+        function pickRandomCard() {
+            const card = getRandomCard();
+            displayCard(card);
+            
+            // Efek visual tambahan
+            pickButton.style.transform = "scale(0.95)";
+            setTimeout(() => {
+                pickButton.style.transform = "scale(1)";
+            }, 150);
+        }
+        
+        // Event listener untuk tombol
+        pickButton.addEventListener('click', pickRandomCard);
+        
+        // Tampilkan kartu pertama saat halaman dimuat
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                pickRandomCard();
+            }, 500);
+        });
+        
+        // Efek tahun baru: tambahkan konfeti saat kartu diambil
+        pickButton.addEventListener('click', function() {
+            createConfetti();
+        });
+        
+        function createConfetti() {
+            const colors = ['#FFD700', '#3498db', '#2ecc71', '#FF1493', '#FF8C00'];
+            
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.top = '50%';
+                confetti.style.left = '50%';
+                confetti.style.opacity = '0.8';
+                confetti.style.zIndex = '9999';
+                confetti.style.pointerEvents = 'none';
+                
+                document.body.appendChild(confetti);
+                
+                // Animasi konfeti
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 3 + Math.random() * 2;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                let posX = 50;
+                let posY = 50;
+                let opacity = 0.8;
+                
+                const animate = () => {
+                    posX += vx;
+                    posY += vy;
+                    vy += 0.1; // gravitasi
+                    opacity -= 0.02;
+                    
+                    confetti.style.left = posX + '%';
+                    confetti.style.top = posY + '%';
+                    confetti.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        document.body.removeChild(confetti);
+                    }
+                };
+                
+                animate();
+            }
+        }
+    </script>
+</body>
+</html>
