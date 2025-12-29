@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c2461, #1e3799);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Layar input nama */
+        .input-screen {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+        
+        .input-screen.hidden {
+            opacity: 0;
+            transform: translateY(-50px);
+            display: none;
+        }
+        
+        /* Layar kartu motivasi */
+        .card-screen {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+        }
+        
+        .card-screen.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1 {
+            color: #0c2461;
+            margin-bottom: 20px;
+            font-size: 2.8rem;
+            background: linear-gradient(to right, #0c2461, #4a69bd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .year-badge {
+            background: linear-gradient(to right, #e55039, #f6b93b);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+        
+        .subtitle {
+            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .input-container {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            text-align: left;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        input:focus {
+            border-color: #4a69bd;
+            box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.2);
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #4a69bd, #1e3799);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(74, 105, 189, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 105, 189, 0.5);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Kartu Motivasi */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-top: 8px solid #4a69bd;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, #4a69bd, #e55039, #f6b93b);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .user-name {
+            color: #0c2461;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .card-number {
+            background: #f8f9fa;
+            color: #4a69bd;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .motivation-text {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 25px;
+            font-style: italic;
+            padding: 0 10px;
+        }
+        
+        .card-category {
+            display: inline-block;
+            background: #f1f8ff;
+            color: #4a69bd;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #4a69bd;
+        }
+        
+        .card-footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.95rem;
+        }
+        
+        .new-year-message {
+            background: linear-gradient(to right, #e55039, #f6b93b);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .btn-reset {
+            background: linear-gradient(to right, #e55039, #f6b93b);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(229, 80, 57, 0.4);
+        }
+        
+        .btn-reset:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(229, 80, 57, 0.5);
+        }
+        
+        @media (max-width: 600px) {
+            .input-screen, .card-screen {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .motivation-text {
+                font-size: 1.2rem;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .sparkle {
+            color: #f6b93b;
+            font-size: 1.5rem;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Layar Input Nama -->
+        <div class="input-screen" id="inputScreen">
+            <h1>Pilih 1 Kartu!</h1>
+            <div class="year-badge">Tahun Baru 2026</div>
+            
+            <p class="subtitle">
+                Selamat datang! Di tahun baru 2026, dapatkan kartu untuk perjalananmu di tahun ini.
+            </p>
+            
+            <div class="input-container">
+                <label for="userName">Masukkan nama kamu:</label>
+                <input type="text" id="userName" placeholder="Contoh: Rizky, Sari, atau Andi" autocomplete="off">
+            </div>
+            
+            <button class="btn" id="generateBtn">
+                Dapatkan Kartu
+            </button>
+            
+            <p class="card-footer" style="margin-top: 30px; color: #777;">
+                Kartu akan dipilih secara acak dari 10 kartu motivasi khusus kamu!
+            </p>
+        </div>
+        
+        <!-- Layar Kartu Motivasi -->
+        <div class="card-screen" id="cardScreen">
+            <h1>Kartu Saya Untuk Tahun 2026</h1>
+            <div class="year-badge">Untuk <span id="displayName"></span></div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="user-name" id="userNameDisplay"></div>
+                    <div class="card-number" id="cardNumber">Kartu #1 dari 10</div>
+                </div>
+                
+                <div class="motivation-text" id="motivationText">
+                    Pesan akan muncul di sini
+                </div>
+                
+                <div class="card-category" id="cardCategory">Kategori</div>
+                
+                <div class="card-footer">
+                    <span class="sparkle">✦</span> Pesan ini khusus untuk perjalananmu di tahun 2026 <span class="sparkle">✦</span>
+                </div>
+            </div>
+            
+            <div class="new-year-message">
+                Selamat Tahun Baru 2026! Semoga tahun ini penuh dengan pencapaian dan kebahagiaan.
+            </div>
+            
+            <button class="btn-reset" id="resetBtn">
+                Buat Kartu Baru untuk Seseorang
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data 10 kartu motivasi
+        const motivationCards = [
+            {
+                text: "Di tahun 2026, jadilah pembelajar yang cepat, bukan yang sempurna. Setiap kesalahan adalah data baru untuk versi terbaik dirimu.",
+                category: "Growth Mindset"
+            },
+            {
+                text: "Koneksi manusia lebih bernilai daripada gengsi di media sosial. Di 2026, bangun hubungan yang berdampak, bukan hanya followers.",
+                category: "Relasi Sehat"
+            },
+            {
+                text: "Teknologi 2026 adalah alat, bukan penentu jati dirimu. Gunakan alat itu untuk berkembang dan membantu proses perkembangan diri.",
+                category: "Keseimbangan Digital"
+            },
+            {
+                text: "Keunikanmu adalah superpower di era AI. Di 2026, apa yang membuatmu berbeda justru akan menjadi kekuatan terbesarmu.",
+                category: "Keunikan Diri"
+            },
+            {
+                text: "Ketika dunia berubah cepat di 2026, yang konstan adalah kemampuanmu beradaptasi. Fleksibilitas adalah skill nomor satu.",
+                category: "Adaptasi"
+            },
+            {
+                text: "Feeling lost is part of the journey. Di 2026, izinkan dirimu bereksplorasi tanpa tekanan harus segera 'tahu semua jawaban'.",
+                category: "Perjalanan Diri"
+            },
+            {
+                text: "Kesehatan mental adalah fondasi, bukan bonus. Di 2026, merawat pikiran sama pentingnya dengan merawat fisik.",
+                category: "Kesehatan Holistik"
+            },
+            {
+                text: "Passion-mu mungkin berevolusi di 2026, dan itu okay. Yang penting tetap punya sesuatu yang membuatmu bangun setiap hari dengan semangat.",
+                category: "Passion & Tujuan"
+            },
+            {
+                text: "Dunia 2026 butuh problem-solvers, bukan hanya kritikus. Jadilah bagian dari solusi, sekecil apa pun kontribusimu.",
+                category: "Kontribusi Sosial"
+            },
+            {
+                text: "Masa depan bukan tentang prediksi sempurna, tapi tentang berani mengambil langkah pertama, bahkan ketika peta belum jelas.",
+                category: "Keberanian"
+            }
+        ];
+        
+        // Elemen DOM
+        const inputScreen = document.getElementById('inputScreen');
+        const cardScreen = document.getElementById('cardScreen');
+        const userNameInput = document.getElementById('userName');
+        const generateBtn = document.getElementById('generateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        const displayName = document.getElementById('displayName');
+        const motivationText = document.getElementById('motivationText');
+        const cardCategory = document.getElementById('cardCategory');
+        const cardNumber = document.getElementById('cardNumber');
+        
+        // Fungsi untuk memilih kartu secara acak
+        function getRandomCard() {
+            const randomIndex = Math.floor(Math.random() * motivationCards.length);
+            return {
+                index: randomIndex,
+                card: motivationCards[randomIndex]
+            };
+        }
+        
+        // Fungsi untuk menghasilkan kartu motivasi
+        function generateMotivationCard() {
+            const userName = userNameInput.value.trim();
+            
+            // Validasi input
+            if (!userName) {
+                alert("Silakan masukkan nama kamu terlebih dahulu!");
+                userNameInput.focus();
+                return;
+            }
+            
+            // Ambil kartu acak
+            const randomCard = getRandomCard();
+            
+            // Tampilkan nama pengguna
+            userNameDisplay.textContent = userName;
+            displayName.textContent = userName;
+            
+            // Tampilkan konten kartu
+            motivationText.textContent = randomCard.card.text;
+            cardCategory.textContent = randomCard.card.category;
+            cardNumber.textContent = `Kartu #${randomCard.index + 1} dari 10`;
+            
+            // Tambahkan efek visual
+            motivationText.classList.remove('fade-in');
+            setTimeout(() => {
+                motivationText.classList.add('fade-in');
+            }, 10);
+            
+            // Pindah ke layar kartu
+            inputScreen.classList.add('hidden');
+            setTimeout(() => {
+                cardScreen.classList.add('active');
+            }, 300);
+            
+            // Simpan nama ke localStorage agar tetap ada setelah refresh
+            localStorage.setItem('userName2026', userName);
+        }
+        
+        // Fungsi untuk reset dan kembali ke layar input
+        function resetToInput() {
+            cardScreen.classList.remove('active');
+            setTimeout(() => {
+                inputScreen.classList.remove('hidden');
+                userNameInput.value = "";
+                userNameInput.focus();
+            }, 300);
+        }
+        
+        // Event Listeners
+        generateBtn.addEventListener('click', generateMotivationCard);
+        
+        resetBtn.addEventListener('click', resetToInput);
+        
+        // Enter key untuk submit
+        userNameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateMotivationCard();
+            }
+        });
+        
+        // Cek jika ada nama di localStorage (saat refresh)
+        window.addEventListener('load', function() {
+            const savedName = localStorage.getItem('userName2026');
+            if (savedName) {
+                // Tampilkan layar kartu jika ada nama tersimpan
+                userNameInput.value = savedName;
+                generateMotivationCard();
+            } else {
+                // Fokus ke input nama
+                userNameInput.focus();
+            }
+        });
+        
+        // Efek visual saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            inputScreen.style.opacity = 0;
+            inputScreen.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                inputScreen.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                inputScreen.style.opacity = 1;
+                inputScreen.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+  </html>
